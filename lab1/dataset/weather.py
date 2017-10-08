@@ -16,9 +16,11 @@ def scrape_weather(city, month, year):
         mint= t.findAll("span", {"class": "min"})
         for d, ma, mi in zip(date, maxt, mint):
             ma = ma.text.replace('°', '')
+            ma = ma.replace('+', '')
             # mi = mi.text.replace('°', '')
             # print(round(mean([int(ma), int(mi)])))
-            monthly.append(int(ma))
+            # print(type(int(ma)), ma)
+            monthly.append(ma)
     return monthly
 
 
@@ -33,7 +35,6 @@ def save_year(city, year):
 
     df.to_csv('{}-{}.csv'.format(city, year), index=False)
 
-    
 
 if __name__ == '__main__':
     city = ['kiev', 'kobelyaki', 'izmail', 'izyum', 'ivano-frankovsk', 
